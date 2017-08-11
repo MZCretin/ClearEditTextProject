@@ -6,11 +6,12 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cretin.www.clearedittextproject.R;
@@ -19,7 +20,7 @@ import com.cretin.www.clearedittextproject.R;
  * Created by Cretin on 2017/8/8.
  */
 
-public class ClearEditText extends RelativeLayout {
+public class ClearEditText extends LinearLayout {
     //记录当前自定义view的宽度
     private int mWidth;
     //记录当前自定义view的高度
@@ -30,11 +31,13 @@ public class ClearEditText extends RelativeLayout {
     private float scaleSize;
 
     public ClearEditText(Context context) {
-        this(context, null, 0);
+        super(context);
+        init(context);
     }
 
     public ClearEditText(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
+        super(context,attrs);
+        init(context);
     }
 
     public ClearEditText(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -45,24 +48,28 @@ public class ClearEditText extends RelativeLayout {
     private void init(Context context) {
         mContext = context;
 
+        setOrientation(HORIZONTAL);
+
         scaleSize = getScale(context);
 
         mEdittext = new EditText(mContext);
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
-        mEdittext.setBackgroundColor(Color.WHITE);
-        mEdittext.setPadding(( int ) (10 * scaleSize),( int ) (4 * scaleSize),
-                ( int ) (10 * scaleSize),( int ) (4 * scaleSize));
+        layoutParams.weight = 1;
+        mEdittext.setBackgroundColor(Color.RED);
+        mEdittext.setPadding(( int ) (10 * scaleSize), ( int ) (4 * scaleSize),
+                ( int ) (10 * scaleSize), ( int ) (4 * scaleSize));
         addView(mEdittext, layoutParams);
+
         mImageView = new ImageView(mContext);
         mImageView.setImageResource(R.mipmap.clear);
         LayoutParams layoutParamsImage = new
                 LayoutParams(( int ) (30 * scaleSize), ( int ) (30 * scaleSize));
-        layoutParamsImage.addRule(ALIGN_PARENT_RIGHT);
-        layoutParamsImage.addRule(CENTER_VERTICAL);
-        mImageView.setPadding(5,5,5,5);
-        mImageView.setVisibility(GONE);
+        mImageView.setPadding(5, 5, 5, 5);
+        mImageView.setVisibility(INVISIBLE);
         addView(mImageView, layoutParamsImage);
+
+        setGravity(Gravity.CENTER);
 
         mImageView.setOnClickListener(new OnClickListener() {
             @Override
@@ -78,10 +85,10 @@ public class ClearEditText extends RelativeLayout {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if( !TextUtils.isEmpty(charSequence)){
+                if ( !TextUtils.isEmpty(charSequence) ) {
                     mImageView.setVisibility(VISIBLE);
-                }else{
-                    mImageView.setVisibility(GONE);
+                } else {
+                    mImageView.setVisibility(INVISIBLE);
                 }
             }
 
@@ -102,6 +109,7 @@ public class ClearEditText extends RelativeLayout {
 
     /**
      * 获取屏幕缩放比
+     *
      * @param context
      * @return
      */

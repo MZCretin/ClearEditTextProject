@@ -63,4 +63,4 @@ dependencies {
 
 ####如果您觉得对您有帮助，请打赏我一杯咖啡的钱：
 
-![image](https://github.com/MZCretin/ClearEditTextProject/blob/master/pic/WEIXIN.JPG)
+![image](https://github.com/MZCretin/ClearEditTextProject/blob/master/pic/WEIXIN.png)

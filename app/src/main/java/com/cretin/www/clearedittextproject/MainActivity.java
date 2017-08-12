@@ -1,12 +1,9 @@
 package com.cretin.www.clearedittextproject;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import com.cretin.www.clearedittext.view.ClearEditText;
+import android.support.v7.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    private ClearEditText clearEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

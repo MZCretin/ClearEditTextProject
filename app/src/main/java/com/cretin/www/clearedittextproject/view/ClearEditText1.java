@@ -36,6 +36,7 @@ public class ClearEditText1 extends EditText {
     }
 
     private void init(Context context) {
+        //实例化右边的清除图片 如果要投入使用最好不要写死，需要后续封装，通过自定义属性设置
         mClearDrawable = context.getResources().getDrawable(R.mipmap.delete);
 
         addTextChangedListener(new TextWatcher() {
@@ -121,7 +122,9 @@ public class ClearEditText1 extends EditText {
         mWidth = width;
         mHeight = height;
         //MUST CALL THIS
-        setPadding(0, 0, mHeight / 4, 0);
+
+//        如果要投入使用最好不要写死，需要后续封装，通过自定义属性设置
+        setPadding(10, 0, mHeight / 4, 10);
         setDrawable();
         setMeasuredDimension(width, height);
     }

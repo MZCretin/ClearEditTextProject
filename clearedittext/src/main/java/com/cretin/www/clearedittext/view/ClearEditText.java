@@ -95,7 +95,7 @@ public class ClearEditText extends EditText {
     public boolean onTouchEvent(MotionEvent event) {
         if ( event.getAction() == MotionEvent.ACTION_UP ) {
             //在图标的范围内点击有效
-            if ( event.getX() > (getWidth() - getHeight() + padding)
+            if ( showClose && event.getX() > (getWidth() - getHeight() + padding)
                     && event.getX() < (getWidth() - padding)
                     && event.getY() > padding
                     && event.getY() < (getHeight() - padding) ) {

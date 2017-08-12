@@ -56,7 +56,7 @@ public class ClearEditText extends LinearLayout {
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         layoutParams.weight = 1;
-        mEdittext.setBackgroundColor(Color.RED);
+        mEdittext.setBackgroundColor(Color.WHITE);
         mEdittext.setPadding(( int ) (10 * scaleSize), ( int ) (4 * scaleSize),
                 ( int ) (10 * scaleSize), ( int ) (4 * scaleSize));
         addView(mEdittext, layoutParams);

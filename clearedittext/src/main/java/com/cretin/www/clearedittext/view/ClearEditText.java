@@ -36,6 +36,7 @@ public class ClearEditText extends EditText {
     private boolean showClose;
     private float scale;
     private float padding;
+    private float mDrawWidth;
 
     public ClearEditText(Context context) {
         super(context);
@@ -61,6 +62,7 @@ public class ClearEditText extends EditText {
                 //获得属性值
                 clearIcon = a.getResourceId(R.styleable.ClearEditText_clearIcon, 0);
                 scale = a.getFloat(R.styleable.ClearEditText_scaleSize, 0);
+                mDrawWidth = a.getDimension(R.styleable.ClearEditText_drawableWidth, 0.0f);
             } finally { //回收这个对象
                 a.recycle();
             }
@@ -129,55 +131,6 @@ public class ClearEditText extends EditText {
         }
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int desiredWidth = 100;
-        int desiredHeight = 100;
-
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-
-        int width;
-        int height;
-
-        //Measure Width
-        if ( widthMode == MeasureSpec.EXACTLY ) {
-            //Must be this size
-            width = widthSize;
-        } else if ( widthMode == MeasureSpec.AT_MOST ) {
-            //Can't be bigger than...
-            width = Math.min(desiredWidth, widthSize);
-        } else {
-            //Be whatever you want
-            width = desiredWidth;
-        }
-
-        //Measure Height
-        if ( heightMode == MeasureSpec.EXACTLY ) {
-            //Must be this size
-            height = heightSize;
-        } else if ( heightMode == MeasureSpec.AT_MOST ) {
-            //Can't be bigger than...
-            height = Math.min(desiredHeight, heightSize);
-        } else {
-            //Be whatever you want
-            height = desiredHeight;
-        }
-        mWidth = width;
-        mHeight = height;
-
-        Log.e("HHHHH", "mWidth mHeight " + mWidth + " " + mHeight);
-        //MUST CALL THIS
-
-        //计算偏移量
-        padding = (( float ) mHeight) * (1 - scale) / 2;
-        //第一次进来的时候对图片进行处理
-        deal();
-        setMeasuredDimension(width, height);
-    }
-
     private boolean hasScale;
 
     private void deal() {
@@ -186,9 +139,18 @@ public class ClearEditText extends EditText {
             int height = mClearBitmap.getHeight();
             Log.e("HHHHH", "width height " + width + " " + height);
             // 设置想要的大小
-            mBitWidth = ( int ) (mHeight - 2 * padding);
-            mBitHeight = mBitWidth;
-            Log.e("HHHHH", "mBitWidth mBitHeight " + mBitWidth + " " + mBitHeight);
+            if ( mDrawWidth == 0 ) {
+                padding = (( float ) mHeight) * (1 - scale) / 2;
+                mBitWidth = ( int ) (mHeight - 2 * padding);
+                mBitHeight = mBitWidth;
+            } else {
+                if ( mDrawWidth > mHeight ) {
+                    mDrawWidth = mHeight;
+                }
+                padding = (( float ) (mHeight - mDrawWidth)) / 2;
+                mBitWidth = ( int ) mDrawWidth;
+                mBitHeight = ( int ) mDrawWidth;
+            }
             // 计算缩放比例
             float scaleWidth = (( float ) mBitWidth) / width;
             float scaleHeight = (( float ) mBitHeight) / height;
@@ -199,6 +161,17 @@ public class ClearEditText extends EditText {
             mClearBitmap = Bitmap.createBitmap(mClearBitmap, 0, 0, width, height, matrix, true);
             hasScale = true;
         }
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mWidth = w;
+        mHeight = h;
+
+        //第一次进来的时候对图片进行处理
+        deal();
+
     }
 }
 

@@ -3,5 +3,6 @@
     <declare-styleable name="ClearEditText">
         <attr name="clearIcon" format="reference"/>
         <attr name="scaleSize" format="float"/>
+        <attr name="drawableWidth" format="dimension"/>
     </declare-styleable>
 </resources>

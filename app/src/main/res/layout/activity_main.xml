@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,49 +9,50 @@
     tools:context="com.cretin.www.clearedittextproject.MainActivity">
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="第一种实现方式"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:text="第一种实现方式"/>
 
     <com.cretin.www.clearedittextproject.view.ClearEditText
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="20dp"
-        android:background="#ffffff"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:background="#ffffff"/>
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="第二种实现方式"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:text="第二种实现方式"/>
 
     <com.cretin.www.clearedittextproject.view.ClearEditText1
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="20dp"
-        android:background="#ffffff"
-        android:gravity="left|center_vertical"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:background="#ffffff"
+        android:gravity="left|center_vertical"/>
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:text="第三种实现方式"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:text="第三种实现方式"/>
 
     <com.cretin.www.clearedittext.view.ClearEditText
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="#ffffff"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="20dp"
+        android:background="#ffffff"
+        app:scaleSize="0.5"/>
 
 </LinearLayout>

@@ -51,7 +51,7 @@
 
 ```
 dependencies {
-        compile 'com.github.MZCretin:ClearEditTextProject:1.0'
+        compile 'com.github.MZCretin:ClearEditTextProject:1.0.0'
     }
 ```
 

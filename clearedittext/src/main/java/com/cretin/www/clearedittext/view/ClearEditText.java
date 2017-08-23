@@ -16,6 +16,7 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.EditText;
 
 import com.cretin.www.clearedittext.R;
@@ -26,7 +27,7 @@ import com.cretin.www.clearedittext.R;
  */
 
 public class ClearEditText extends EditText {
-    private static final float DEFAUT_SCALE = 0.4f;
+    private static final float DEFAUT_SCALE = 0.3f;
     private Bitmap mClearBitmap;
     private Paint mPaint;
     private int mWidth;
@@ -97,6 +98,22 @@ public class ClearEditText extends EditText {
             public void afterTextChanged(Editable s) {
             }
         });
+
+        setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if ( hasFocus ) {
+                    if ( !TextUtils.isEmpty(getText().toString()) ) {
+                        showClose = true;
+                    }else{
+                        showClose = false;
+                    }
+                }else{
+                    showClose = false;
+                }
+                invalidate();
+            }
+        });
     }
 
     // 处理删除事件
@@ -118,6 +135,7 @@ public class ClearEditText extends EditText {
     protected void finalize() throws Throwable {
         super.finalize();
     }
+
 
     @Override
     protected void onDraw(Canvas canvas) {
